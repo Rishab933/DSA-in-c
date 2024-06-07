@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+	int data;
+	struct Node * next;
+};
+void traversal(struct Node*p)
+{
+	int i=1;
+	while(p!=NULL)
+	{
+		printf("\nElement %d = %d",i,p->data);
+		i++;
+		p=p->next;
+	}
+}
+struct Node * deletionKEYnode(struct Node*p,int key)
+{
+	struct Node*x=p;
+	struct Node*y=p->next;
+	while(y->data!=key&&y->next!=NULL)
+	{
+		x=x->next;
+		y=y->next;
+	}
+	x->next=y->next;
+	free(y);
+}
+int main()
+{
+	struct Node * head=(struct Node*)malloc(sizeof(struct Node));
+	struct Node * second=(struct Node*)malloc(sizeof(struct Node));
+	struct Node * third=(struct Node*)malloc(sizeof(struct Node));
+	struct Node * forth=(struct Node*)malloc(sizeof(struct Node));
+	head->data=10;
+	head->next=second;
+	second->data=20;
+	second->next=third;
+	third->data=30;
+	third->next=forth;
+	forth->data=40;
+	forth->next=NULL;
+	printf("\nElements in the LinkedList before deletion: ");
+	traversal(head);
+	int val;
+	printf("\nEnter the key: ");
+	scanf("%d",&val);
+	deletionKEYnode(head,val);
+	printf("\nElements in the LinkedList after deletion: ");
+	traversal(head);
+}
